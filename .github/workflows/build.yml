@@ -1,7 +1,5 @@
 name: Build MairaAI APK
-on:
-  push:
-    branches: [main]
+on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,16 +12,12 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-      - run: |
-          npm init -y
-          npm install @capacitor/core @capacitor/cli @capacitor/android
-          npx cap init MairaAI com.maira.ai --web-dir=. --npm-client=npm
-          npx cap add android
-          npx cap copy android
-          cd android
-                    chmod +x gradlew
-          ./gradlew assembleDebug
-         
+      - run: npm init -y
+      - run: npm i @capacitor/core @capacitor/cli @capacitor/android
+      - run: npx cap init MairaAI com.maira.ai --web-dir=. --npm-client=npm
+      - run: npx cap add android
+      - run: npx cap copy android
+      - run: cd android && chmod +x gradlew &&./gradlew assembleDebug
       - uses: actions/upload-artifact@v4
         with:
           name: MairaAI-APK
