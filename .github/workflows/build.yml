@@ -21,8 +21,9 @@ jobs:
           npx cap add android
           npx cap copy android
           cd android
-          chmod +x gradlew
-         ./gradlew assembleDebug
+                    chmod +x gradlew
+          ./gradlew assembleDebug
+         
       - uses: actions/upload-artifact@v4
         with:
           name: MairaAI-APK
